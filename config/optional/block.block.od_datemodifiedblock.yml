@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - wxt_library
+  theme:
+    - od_bootstrap
+third_party_settings:
+  block_class:
+    classes: 'col-sm-5 col-xs-12'
+id: od_datemodifiedblock
+theme: od_bootstrap
+region: content_footer
+weight: -12
+provider: null
+plugin: date_modified_block
+settings:
+  id: date_modified_block
+  label: 'Date Modified'
+  provider: wxt_library
+  label_display: '0'
+  date_format:
+    page: page
+  date_modified: tiny
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

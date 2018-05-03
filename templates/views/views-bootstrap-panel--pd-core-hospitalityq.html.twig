@@ -1,0 +1,24 @@
+<div id="{{ id }}" {{ attributes.addClass(classes).removeClass('panel-group') }}>
+  {% for key, row in rows -%}
+    <div class="panel panel-default mrgn-tp-md">
+      <div class="panel-heading">
+        {% if row.title is not empty %}
+        <h4 class="panel-title">
+          {{ row.title }}
+        </h4>
+        {% else %}
+        <h4 class="panel-title">
+         {{ 'N/A'|t }}
+        </h4>
+        {% endif %}
+      </div>
+      <div class="panel-body">
+        {% if row.title is not empty %}
+        {{ row.content }}
+        {% else %}
+        {{ row.content }}
+        {% endif %}
+      </div>
+    </div>
+  {%- endfor %}
+</div>

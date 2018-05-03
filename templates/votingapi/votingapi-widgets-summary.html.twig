@@ -1,0 +1,5 @@
+{% if results.vote_field_count is not empty %}
+  {% trans %}
+    {{ results.vote_field_count }} votes with an average of {{ results.vote_field_average }}
+  {% endtrans %}
+{% endif %}

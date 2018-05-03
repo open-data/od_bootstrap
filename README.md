@@ -1,2 +1,3 @@
-# od_bootstrap
-Drupal 8 theme for open.canada.ca. (in development)
+# Open.Canada.ca Bootstrap
+
+[Bootstrap Framework]: http://getbootstrap.com

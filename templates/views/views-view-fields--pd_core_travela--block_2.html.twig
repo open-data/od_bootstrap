@@ -1,0 +1,152 @@
+{#
+/**
+ * @file
+ * Default view template to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set prev_year = fields.year.content|striptags|trim - 1 %}
+<h2>{{ 'Annual Report on Travel, Hospitality and Conference Expenditures:'|t ~ ' ' ~ prev_year ~ ' - ' ~ fields.year.content|striptags|trim }}</h2>
+{% if (language == 'fr') %}
+{% set organization_name = fields['org_name_fr'].content %}
+{% else %}
+{% set organization_name = fields['org_name_en'].content %}
+{% endif %}
+<p>{{ 'As required by the Treasury Board Directive on Travel, Hospitality, Conference and Event Expenditures, this report provides information on the annual expenditures for each of travel, hospitality and conference fees for the @department for the fiscal year ending March 31, @date. It also provides the variance explanations from the previous fiscal year in each of these areas.'|t( { '@department': organization_name, '@date': fields.year.content }) }}</p>
+<p>{{ 'This information is updated annually and does not contain information withheld under the Access to Information Act or the Privacy Act.'|t }}</p>
+<p>{{ 'Expenditures on travel, hospitality and conference fees incurred by federal departments and agencies are related to activities that support a departmental or agency mandate and the government’s priorities.'|t }}</p>
+<p><strong>{{ 'Departmental Mandate:'|t }}</strong>
+  {% if (language == 'fr') %}
+  {{ fields['mandate_description_fr'].content }}
+  {% else %}
+  {{ fields['mandate_description_en'].content }}
+  {% endif %}
+</p>
+<h3 class="mrgn-bttm-md">{{ 'Department:'|t }}
+  {% if (language == 'fr') %}
+  {{ fields['org_name_fr'].content }}
+  {% else %}
+  {{ fields['org_name_en'].content }}
+  {% endif %}
+</h3>
+<table class="table table-striped table-bordered">
+  <thead>
+      <th>{{ 'Expenditure Category'|t }}</th>
+      <th>{{ "Expenditures for the year ending March 31, @date ($ thousands)"|t({ '@date': fields.year.content }) }}</th>
+      <th>{{ "Expenditures for the previous year ending March 31, @date ($ thousands)"|t({ '@date': prev_year }) }}</th>
+      <th>{{ 'Change ($ thousands)'|t }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ 'Travel - Public Servants'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.public_servants.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.public_servants_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.public_servants_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.public_servants.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.public_servants_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.public_servants_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'Travel - Non-Public Servants'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.non_public_servants.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.non_public_servants_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.non_public_servants_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.non_public_servants.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.non_public_servants_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.non_public_servants_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'Total Travel'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.total_travel.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.total_travel_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.total_travel_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.total_travel.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.total_travel_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.total_travel_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'Hospitality'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.hospitality.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.hospitality_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.hospitality_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.hospitality.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.hospitality_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.hospitality_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'Conference Fees'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.conference_fees.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.conference_fees_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.conference_fees_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.conference_fees.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.conference_fees_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.conference_fees_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'Total'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.total.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.total_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.total_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.total.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.total_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.total_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>{{ 'International Travel by Minister and Minister\'s Staff'|t }}</td>
+      {% if (language == 'fr') %}
+        <td>{{ fields.minister.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.minister_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+        <td>{{ fields.minister_change.content|striptags|trim|number_format('0', ',', ' ') }}</td>
+      {% else %}
+        <td>{{ fields.minister.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.minister_previous_year.content|striptags|trim|number_format('0', '.', ',') }}</td>
+        <td>{{ fields.minister_change.content|striptags|trim|number_format('0', '.', ',') }}</td>
+      {% endif %}
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,207 @@
+// Theme Customizations to Open Data
+
+.pillars {
+  background-color: #eaebed;
+  display: inline-block;
+  padding: 10px 5px;
+  h2 {
+    display: inline;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .ogov {
+    vertical-align: middle;
+  }
+  ul {
+    display: inline;
+    margin-left: 5px;
+    padding-left: 0;
+    font-size: 2em;
+    vertical-align: middle;
+    li {
+      display: inline-block;
+      margin: 0 7px 0 0;
+      padding: 0;
+      a {
+        color: #284162 !important;
+        text-decoration: none;
+      }
+    }
+  }
+  .opengov-open-gov {
+    color: #365478 !important;
+  }
+  .opengov-open-data {
+    color: #3AB19D !important;
+  }
+  .opengov-open-info {
+    color: #EB8B23 !important;
+  }
+  .opengov-open-dialog {
+    color: #9D479A !important;
+  }
+}
+
+.apps {
+  .box {
+    position:relative;
+    border: 1px solid #BBB;
+    background:#eee;
+    float:left;
+    & > div {
+      margin: 15px;
+    }
+  }
+}
+
+.ribbon {
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+  span {
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    line-height: 20px;
+    transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    background: #79A70A;
+    background: linear-gradient(#F70505 0%, #8F0808 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 19px;
+    right: -21px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: -1;
+      border-left: 3px solid #8F0808;
+      border-right: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid #8F0808;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: -1;
+      border-right: 3px solid #8F0808;
+      border-left: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid #8F0808;
+    }
+  }
+}
+
+.public {
+  span {
+    background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+    &::before {
+      border-left-color: #79A70A;
+      border-top-color: #79A70A;
+    }
+    &::after {
+      border-right-color: #79A70A;
+      border-top-color: #79A70A;
+    }
+  }
+}
+
+.code {
+  span {
+    background: linear-gradient(#2989d8 0%, #1e5799 100%);
+    &::before {
+      border-left-color: #1e5799;
+      border-top-color: #1e5799;
+    }
+    &::after {
+      border-right-color: #1e5799;
+      border-top-color: #1e5799;
+    }
+  }
+}
+
+.idea.full, .idea.default {
+  & > .panel-heading {
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.block-region-top .pillars {
+  float: right;
+}
+
+.user-register-form,
+.webform-submission-form {
+  margin-top: 10px;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+.user-register-form legend {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#quicktabs-suggested_ideas ul {
+  margin-left: 0px;
+  padding: 0px;
+  li {
+    &.active {
+      font-weight: bold;
+    }
+    margin: 0px 15px 0px 0px;
+  }
+}
+
+.external-comment-external-comment-form {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.external-comment-external-comment-form .js-comment {
+  margin-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.external-comment-external-comment-form .field--name-title {
+  font-weight: bold;
+  font-size: 26px;
+  margin-top: 38px;
+  margin-bottom: 20px;
+}
+
+.field--name-field-icon {
+  margin-top: 1.5em;
+  .opengov {
+    font-size: 7em;
+    color: #335075;
+  }
+}
+
+.odstream:first-child {
+  h2 {
+    margin-top: 0em;
+  }
+}
+
+.block-facets-summary {
+  .clear-filters {
+    margin-top: 15px;
+  }
+}

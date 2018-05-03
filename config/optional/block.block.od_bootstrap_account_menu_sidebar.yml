@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - block_class
+    - system
+    - wxt_library
+  theme:
+    - od_bootstrap
+third_party_settings:
+  block_class:
+    classes: ''
+id: od_bootstrap_account_menu_sidebar
+theme: od_bootstrap
+region: sidebar_first
+weight: -10
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility:
+  request_path:
+    id: request_path
+    pages: "/user/register\r\n/user/login"
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
