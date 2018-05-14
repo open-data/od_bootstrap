@@ -1,6 +1,6 @@
 # Open.Canada.ca Bootstrap
 
-See [Site-Open-Data] for more info.
+See the [site-open-data] repo for more info.
 
-[Site-Open-Data]: https://github.com/open-data/site-open-data
+[site-open-data]: https://github.com/open-data/site-open-data
 [Bootstrap Framework]: http://getbootstrap.com
