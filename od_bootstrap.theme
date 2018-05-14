@@ -6,6 +6,7 @@
  *
  * Place your custom PHP code in this file.
  */
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
@@ -22,7 +23,7 @@ function od_bootstrap_theme_suggestions_html_alter(array &$suggestions, array $v
  * Implements hook_preprocess_HOOK() for block.html.twig.
  */
 function od_bootstrap_preprocess_block(&$vars) {
-  if($vars['plugin_id'] == 'user_account_block') {
+  if ($vars['plugin_id'] == 'user_account_block') {
     $vars['#cache']['max-age'] = 0;
   }
 }

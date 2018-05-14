@@ -2,10 +2,8 @@
 
 namespace Drupal\od_bootstrap\Plugin\Preprocess;
 
-use Drupal\Core\Render\Markup;
 use Drupal\bootstrap\Plugin\Preprocess\PreprocessBase;
 use Drupal\bootstrap\Utility\Variables;
-use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -26,4 +24,5 @@ class PanelizerViewMode extends PreprocessBase {
     $variables['language'] = $language;
     $variables['language_prefix'] = $language_prefix[$language];
   }
+
 }
