@@ -21,7 +21,7 @@
   "scripts": {
     "postinstall": "find node_modules/ -name '*.info' -type f -delete"
   },
-  "author": "William Hearn",
+  "author": "Government of Canada",
   "license": "MIT",
   "repository": {
     "type": "git",
