@@ -20,7 +20,7 @@ class Username extends PreprocessBase {
    * {@inheritdoc}
    */
   public function preprocessVariables(Variables $variables) {
-    $account = $variables['account'] ? : new AnonymousUserSession();
+    $account = $variables['account'] ?: new AnonymousUserSession();
 
     // Set the name to a formatted name that is safe for printing and
     // that won't break tables by being too long. Keep an unshortened,
