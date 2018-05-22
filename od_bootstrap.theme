@@ -53,4 +53,5 @@ function od_bootstrap_page_attachments_alter(&$page) {
   } else {
     $page['#attached']['library'][] = 'od_bootstrap/adobeanalytics';
   }
+  $page['#attached']['library'][] = 'od_bootstrap/adobeanalytics_footer';
 }
