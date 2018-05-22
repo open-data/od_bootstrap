@@ -1,4 +1,5 @@
 <?php
+use \Drupal\Core\Site\Settings;
 
 /**
  * @file
@@ -41,4 +42,15 @@ function od_bootstrap_preprocess_html(&$vars) {
   ];
 
   $vars['page']['#attached']['html_head'][] = [$dctermsservice, 'dcterms.service'];
+}
+
+/**
+ * Implements hook_page_attachments_alter()
+ */
+function od_bootstrap_page_attachments_alter(&$page) {
+  if (Settings::get('development_mode', NULL)) {
+    $page['#attached']['library'][] = 'od_bootstrap/adobeanalytics_staging';
+  } else {
+    $page['#attached']['library'][] = 'od_bootstrap/adobeanalytics';
+  }
 }
