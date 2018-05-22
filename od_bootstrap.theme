@@ -27,3 +27,18 @@ function od_bootstrap_preprocess_block(&$vars) {
     $vars['#cache']['max-age'] = 0;
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function od_bootstrap_preprocess_html(&$vars) {
+  $dctermsservice = [
+    '#tag' => 'meta',
+    '#attributes' => [
+      'name' => 'dcterms.service',
+      'content' => 'OpenGov',
+    ],
+  ];
+
+  $vars['page']['#attached']['html_head'][] = [$dctermsservice, 'dcterms.service'];
+}
