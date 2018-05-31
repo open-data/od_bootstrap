@@ -20,8 +20,10 @@
  * @ingroup themeable
  */
 #}
-{% if (language == 'fr') %}
-  {{ output|striptags|trim|number_format('2', ',', '  ') ~ ' $' }}
-{% else %}
-  {{ '$' ~ output|striptags|trim|number_format('2', '.', ',') }}
+{% if output %}
+  {% if (language == 'fr') %}
+    {{ output|striptags|trim|number_format('2', ',', '  ') ~ ' $' }}
+  {% else %}
+    {{ '$' ~ output|striptags|trim|number_format('2', '.', ',') }}
+  {% endif %}
 {% endif %}
