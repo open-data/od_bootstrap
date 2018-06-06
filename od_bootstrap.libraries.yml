@@ -15,3 +15,19 @@ adobeanalytics_staging:
 adobeanalytics_footer:
   js:
     js/adobeanalytics.js: {}
+od_bootstrap.checkbox-widget:
+  version: VERSION
+  js:
+    js/checkbox-widget.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+od_bootstrap.clear-btn:
+  version: VERSION
+  js:
+    js/clear-btn.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once

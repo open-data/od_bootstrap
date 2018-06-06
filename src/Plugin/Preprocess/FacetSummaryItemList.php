@@ -21,7 +21,7 @@ class FacetSummaryItemList extends PreprocessBase {
     foreach ($variables['items'] as &$facet) {
       if (!empty($facet['value']['#title']['#theme']) &&
           $facet['value']['#title']['#theme'] == 'facets_result_item__summary') {
-        $facet['value']['#title']['#value'] .= ' [X]';
+        $facet['value']['#title']['#value'] .= ' [Х]';
       }
     }
   }

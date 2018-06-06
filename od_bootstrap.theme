@@ -27,6 +27,12 @@ function od_bootstrap_preprocess_block(&$vars) {
   if ($vars['plugin_id'] == 'user_account_block') {
     $vars['#cache']['max-age'] = 0;
   }
+  if (substr($vars['plugin_id'],0,11) == 'facet_block') {
+    $vars['#attached']['library'][] = 'od_bootstrap/od_bootstrap.checkbox-widget';
+  }
+  if (substr($vars['plugin_id'],0,26) == 'views_exposed_filter_block') {
+     $vars['#attached']['library'][] = 'od_bootstrap/od_bootstrap.clear-btn';
+  }
 }
 
 /**

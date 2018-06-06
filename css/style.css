@@ -154,3 +154,46 @@
 
 .block-facets-summary .clear-filters {
   margin-top: 15px; }
+
+.block-facets .panel-body, .block-facets-summary .panel-body {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0; }
+
+.block-facets .checkbox, .block-facets-summary .checkbox {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+details[open].block-facets, details[open].block-facets-summary {
+  padding-bottom:0; }
+
+.block-facets label, .block-facets-summary label {
+  font-weight: 400; }
+
+.block-facets .list-group, .block-facets-summary .list-group {
+  margin-bottom: 0; }
+
+ul.js-facets-checkbox-links {
+  margin-left: -1.1em;
+  margin-right: -1.1em; }
+
+ul.js-facets-checkbox-links .facet-item label {
+  margin-left: 0;
+  display: block; }
+
+.block-facets li.active .text-muted, .block-facets-summary li.active .text-muted {
+  color: #fff; }
+
+.wb-overlay.bs-region--top-left {
+  background-color: transparent;
+  z-index: initial;
+  display: block; }
+
+span.clear-btn {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  color: black;
+  font-weight: bold;
+  left: -15px;
+  visibility: hidden; }
