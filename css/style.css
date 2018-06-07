@@ -184,11 +184,10 @@ ul.js-facets-checkbox-links .facet-item label {
 .block-facets li.active .text-muted, .block-facets-summary li.active .text-muted {
   color: #fff; }
 
-.wb-overlay.bs-region--top-left {
+/*.wb-overlay.bs-region--top-left {
   background-color: transparent;
-  z-index: initial;
   display: block; }
-
+*/
 span.clear-btn {
   cursor: pointer;
   position: relative;
