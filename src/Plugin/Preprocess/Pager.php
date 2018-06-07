@@ -20,8 +20,9 @@ class Pager extends PreprocessBase {
    */
   public function preprocessVariables(Variables $variables) {
     global $pager_total;
-    $variables['items']['first']['text'] = 1;
-    $variables['items']['last']['text'] = $pager_total[$variables['pager']['#element']];
+
+    if (isset($variables['items']['first'])) $variables['items']['first']['text'] = 1;
+    if (isset($variables['items']['last'])) $variables['items']['last']['text'] = $pager_total[$variables['pager']['#element']];
   }
 
 }

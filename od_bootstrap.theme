@@ -30,8 +30,14 @@ function od_bootstrap_preprocess_block(&$vars) {
   if (substr($vars['plugin_id'],0,11) == 'facet_block') {
     $vars['#attached']['library'][] = 'od_bootstrap/od_bootstrap.checkbox-widget';
   }
+
+  if (substr($vars['plugin_id'],0,20) == 'facets_summary_block') {
+    $vars['itemcount'] = count($vars['content']['#items']);
+  }
+
   if (substr($vars['plugin_id'],0,26) == 'views_exposed_filter_block') {
-     $vars['#attached']['library'][] = 'od_bootstrap/od_bootstrap.clear-btn';
+    $vars['#attached']['library'][] = 'od_bootstrap/od_bootstrap.clear-btn';
+    $vars['content']['#attributes']['region'] = $vars['elements']['#configuration']['region'];
   }
 }
 
