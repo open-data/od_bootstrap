@@ -48,33 +48,30 @@
 {%
   set classes = [
     'panel',
-    'panel-default',
+    'panel-primary',
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
-    'mrgn-bttm-0',
+    'mrgn-tp-0',
     'clearfix',
   ]
 %}
-<details{{ attributes.addClass(classes) }}>
+{% if itemcount > 0 %}
+<section{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-    <summary class="panel-heading">
+    <header class="panel-heading">
       <h2{{ title_attributes.addClass('panel-title') }}>
         {{ label }}
       </h2>
-    </summary>
+    </header>
   {% endif %}
   {{ title_suffix }}
 
   {% block content %}
-     {{ content }}
-     <div class="panel-body">
-      <div class="mrgn-tp-sm">
-        <a href="http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/pd-dp/index-eng.asp">
-          {{ 'View all Departments'|t }}
-        </a>
-      </div>
+    <div class="panel-body">
+      {{ content }}
     </div>
   {% endblock %}
-</details>
+</section>
+{% endif %}

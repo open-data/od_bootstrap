@@ -30,10 +30,8 @@ class ViewsSearchApiFullText extends PreprocessBase {
           if (($key[0] != "#") && ($element['#type'] != "") 
              && (!in_array($element['#type'], array('actions','hidden'))) && (!in_array($key, array('sort_by','sort_order')))) {
             unset($form[$key]);
-// echo $key . PHP_EOL;
           }
         }
-//        exit;
       }
     }
   }

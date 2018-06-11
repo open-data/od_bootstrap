@@ -11,6 +11,14 @@
 (function ($, Drupal) {
   'use strict';
 
+  Drupal.behaviors.sort_form = {
+     attach: function(context, settings) {
+       $('#edit-sort-by').on("change", function() {
+         this.form.submit();
+       });
+     }
+  };
+
   Drupal.behaviors.clear_btn = {
     attach: function(context, settings) {
       var $textInput = $('#edit-search-api-fulltext');
@@ -37,25 +45,27 @@
 
   Drupal.behaviors.filter_sort_btn = {
     attach: function(context, settings) {
+      var $region = $('.bs-region--top-left');
+      $region.attr('id', 'bs-region--top-left');
+      $('#view-filter-mobile').trigger( "wb-init.wb-overlay" );
       $('#view-filter-mobile').on( "click", function() {
         var fullClasses = "hidden-xs col-sm-3 col-md-3";
-        var modalClasses = "wb-overlay overlay-def wb-panel-r wb-init wb-overlay-inited modal-content open";
-        var $region = $('.bs-region--top-left');
+        var modalClasses = "wb-overlay modal-content overlay-def wb-popup-full open";
+        var $region = $('#bs-region--top-left');
+        var $div = $('.block-region-top-left');
         if ($region.hasClass("open")) {
           $region.addClass(fullClasses).removeClass(modalClasses);
+          $region.removeClass('modal-body');
         } else {
+          $region.trigger( "open.wb-overlay" );
+          $region.addClass('modal-body');
           $region.removeClass(fullClasses).addClass(modalClasses);
         }
       });
       $('#view-sort-mobile').on( "click", function() {
-alert("SORT");
+
       });
-
-
     }
   };
-
-
-
 
 })(window.jQuery, window.Drupal, window.drupalSettings);

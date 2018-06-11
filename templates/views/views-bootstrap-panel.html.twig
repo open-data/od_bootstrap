@@ -1,12 +1,10 @@
 <div id="{{ id }}" {{ attributes.addClass(classes).removeClass('panel-group') }}>
   {% for key, row in rows -%}
     <div class="panel panel-default mrgn-tp-md">
-      <div class="panel-heading">
+      <div class="panel-body">
         <h4 class="panel-title">
           {{row.title}}
         </h4>
-      </div>
-      <div class="panel-body">
         {{row.content}}
       </div>
     </div>
