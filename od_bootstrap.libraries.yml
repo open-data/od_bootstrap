@@ -23,10 +23,10 @@ od_bootstrap.checkbox-widget:
     - core/jquery
     - core/drupal
     - core/jquery.once
-od_bootstrap.clear-btn:
+od_bootstrap.views-exposed-form-enhancements:
   version: VERSION
   js:
-    js/clear-btn.js: {}
+    js/views-exposed-form-enhancements.js: {}
   dependencies:
     - core/jquery
     - core/drupal

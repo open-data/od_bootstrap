@@ -21,7 +21,7 @@ class ViewsSearchApiFullText extends PreprocessBase {
     $form = &$variables['form'];
     $form['search_api_fulltext']['#size'] = 100;
 
-    if ($form['form_id']['#value'] == "views_exposed_form") {
+    if ((isset($form['form_id'])) && ($form['form_id']['#value'] == "views_exposed_form")) {
       if ($variables['attributes']['region'] == "top") {
         unset($form['sort_by']);
         unset($form['sort_order']);

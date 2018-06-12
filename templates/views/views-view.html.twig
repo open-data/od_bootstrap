@@ -50,17 +50,14 @@
   {% if header %}
     <div class="view-header">
       <div class="row">
-        <div class="col-sm-6 col-xs-12 mrgn-bttm-md">
+        <div class="col-xs-12 col-sm-6 mrgn-bttm-md">
           {{ header }}
         </div>
-        <div class="col-sm-6 hidden-xs text-right">
+        <div class="col-xs-12 hidden-sm hidden-md hidden-lg mrgn-bttm-md">
+          <button class="btn btn-default btn-block" id="view-filter-mobile"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-right">
           {{ sortform }}
-        </div>
-	<div class="col-xs-6 hidden-sm hidden-md hidden-lg">
-          <a href="#bs-region--top-left" aria-controls="#bs-region--top-left" class="btn btn-default btn-block overlay-lnk" id="view-filter-mobile" role="button"><span class="glyphicon glyphicon-filter"></span> Filter</a>
-        </div>
-        <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
-          <button class="btn btn-default btn-block" id="view-sort-mobile"><span class="glyphicon glyphicon-sort-by-attributes"></span> Sort</button>
         </div>
       </div>
     </div>

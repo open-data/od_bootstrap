@@ -8,19 +8,22 @@
  *   *
  *    * @namespace
  *     */
-(function ($, Drupal) {
+(function ($, Drupal, window, document, wb ) {
   'use strict';
 
   Drupal.behaviors.sort_form = {
-     attach: function(context, settings) {
-       $('#edit-sort-by').on("change", function() {
-         this.form.submit();
-       });
-     }
+    attach: function (context, settings) {
+      if (context.constructor.name != "HTMLDocument") return;
+
+      $('#edit-sort-by').on("change", function() {
+        this.form.submit();
+      });
+    }
   };
 
   Drupal.behaviors.clear_btn = {
-    attach: function(context, settings) {
+    attach: function (context, settings) {
+      if (context.constructor.name != "HTMLDocument") return;
       var $textInput = $('#edit-search-api-fulltext');
 
       if ($('.clear-btn').length == 0) {
@@ -28,8 +31,8 @@
       }
       $(this).next().css('visibility', ($textInput.length) ? "visible" : "hidden");
 
+      // Show the clear button if text input value is not empty
       $textInput.keyup(function() {
-        // Show the clear button if text input value is not empty
         $(this).next().css('visibility', ($(this).length) ? "visible" : "hidden");
       });
 
@@ -38,34 +41,49 @@
         $textInput.val('');
         $(this).css('visibility', 'hidden');
         $(this).parents('form').find('button.form-submit').trigger('click');
-        // $(this).parents('form').submit();
       });
     }
   };
 
   Drupal.behaviors.filter_sort_btn = {
-    attach: function(context, settings) {
-      var $region = $('.bs-region--top-left');
-      $region.attr('id', 'bs-region--top-left');
-      $('#view-filter-mobile').trigger( "wb-init.wb-overlay" );
-      $('#view-filter-mobile').on( "click", function() {
-        var fullClasses = "hidden-xs col-sm-3 col-md-3";
-        var modalClasses = "wb-overlay modal-content overlay-def wb-popup-full open";
-        var $region = $('#bs-region--top-left');
-        var $div = $('.block-region-top-left');
-        if ($region.hasClass("open")) {
-          $region.addClass(fullClasses).removeClass(modalClasses);
-          $region.removeClass('modal-body');
-        } else {
-          $region.trigger( "open.wb-overlay" );
-          $region.addClass('modal-body');
-          $region.removeClass(fullClasses).addClass(modalClasses);
-        }
-      });
-      $('#view-sort-mobile').on( "click", function() {
+    attach: function (context, settings) {
+      if (context.constructor.name != "HTMLDocument") return;
 
+      var $filterElm = $('.bs-region--top-left');
+      $filterElm.attr('id', 'bs-region--top-left');
+
+      var sidebarClass = "hidden-xs col-sm-3 col-md-3";
+      var popupClass = "wb-overlay modal-content overlay-def wb-popup-full";
+      $('#view-filter-mobile').on( "click", function() {
+        $filterElm.removeClass(sidebarClass);
+        $filterElm.addClass(popupClass);
+        $filterElm.trigger("wb-init.wb-overlay");
+        $filterElm.trigger("open.wb-overlay");
+      });
+
+      // Link trigger
+      wb.doc.on( "click vclick", ".wb-overlay a[href^='#']", function( event ) {
+        $filterElm.removeClass(popupClass + " wb-overlay-inited");
+        $filterElm.addClass(sidebarClass);
+        $filterElm.find(".modal-footer,#hdrClose").remove();
+      });
+
+      // Close trigger
+      wb.doc.on( "click vclick", ".overlay-close", function( event ) {
+        $filterElm.removeClass(popupClass + " wb-overlay-inited");
+        $filterElm.addClass(sidebarClass);
+        $filterElm.find(".modal-footer,#hdrClose").remove();
+      });
+
+      // JS or keyboard trigger
+      wb.doc.on( "timerpoke.wb wb-init.wb-overlay keydown open.wb-overlay close.wb-overlay", ".wb-overlay", function( event ) {
+        if ((event.type == "close") || (event.which == 27)) {
+          $filterElm.removeClass(popupClass + " wb-overlay-inited");
+          $filterElm.addClass(sidebarClass);
+          $filterElm.find(".modal-footer,#hdrClose").remove();
+        }
       });
     }
   };
 
-})(window.jQuery, window.Drupal, window.drupalSettings);
+})(jQuery, Drupal, window, document, wb);
