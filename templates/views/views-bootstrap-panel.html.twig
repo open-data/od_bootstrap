@@ -1,11 +1,8 @@
-<div id="{{ id }}" {{ attributes.addClass(classes).removeClass('panel-group') }}>
+<div id="{{ id }}" {{ attributes.addClass(classes).addClass('mrgn-bttm-md').removeClass('panel-group') }}>
   {% for key, row in rows -%}
     <div class="panel panel-default mrgn-tp-md">
       <div class="panel-body">
-        <h4 class="panel-title">
-          {{row.title}}
-        </h4>
-        {{row.content}}
+        {{ row.content }}
       </div>
     </div>
   {%- endfor %}

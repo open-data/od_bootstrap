@@ -48,29 +48,28 @@
 {%
   set classes = [
     'panel',
-    'panel-primary',
+    'panel-default',
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
-    'mrgn-tp-lg',
+    'mrgn-bttm-0',
     'clearfix',
   ]
 %}
-<section{{ attributes.addClass(classes) }}>
+<details{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-    <header class="panel-heading">
+    <summary class="panel-heading">
       <h2{{ title_attributes.addClass('panel-title') }}>
-        <span class="glyphicon glyphicon-filter"></span>
         {{ label }}
       </h2>
-    </header>
+    </summary>
   {% endif %}
   {{ title_suffix }}
 
   {% block content %}
+    {{ content }}
     <div class="panel-body">
-      {{ content }}
       <div class="mrgn-tp-sm">
         <a href="http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/pd-dp/index-fra.asp">
           {{ 'View all Departments'|t }}
@@ -78,4 +77,4 @@
       </div>
     </div>
   {% endblock %}
-</section>
+</details>

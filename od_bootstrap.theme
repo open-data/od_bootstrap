@@ -27,14 +27,16 @@ function od_bootstrap_preprocess_views_view(&$vars) {
   $block_manager = \Drupal::service('plugin.manager.block');
   $config = [];
 
-  $plugin_block = $block_manager->createInstance('exposed_sort_block:pd_core_contracts-block_1', $config);
+  $plugin_block = $block_manager->createInstance('exposed_sort_block:'.$vars['id'].'-'.$vars['display_id'], $config);
 
   $access_result = $plugin_block->access(\Drupal::currentUser());
   if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
     return;
   }
-
-  $vars['sortform'] = $plugin_block->build();
+  $form = $plugin_block->build();
+  if (!isset($form['message'])) {
+    $vars['sortform'] = $form;
+  }
 }
 
 /**
@@ -49,7 +51,11 @@ function od_bootstrap_preprocess_block(&$vars) {
   }
 
   if (substr($vars['plugin_id'],0,20) == 'facets_summary_block') {
-    $vars['itemcount'] = count($vars['content']['#items']);
+     if (isset($vars['content']['#items'])) {
+       $vars['itemcount'] = count($vars['content']['#items']);
+     } else {
+       $vars['itemcount'] = 0;
+     }
   }
 
   if (substr($vars['plugin_id'],0,26) == 'views_exposed_filter_block') {

@@ -29,18 +29,18 @@
       if ($('.clear-btn').length == 0) {
        $textInput.after('<span class="clear-btn hidden-xs" title="Clear">&times;</span>');
       }
-      $(this).next().css('visibility', ($textInput.length) ? "visible" : "hidden");
+      $('.clear-btn').css('visibility', ($textInput.val().length) ? "visible" : "hidden");
 
       // Show the clear button if text input value is not empty
       $textInput.keyup(function() {
-        $(this).next().css('visibility', ($(this).length) ? "visible" : "hidden");
+        $('.clear-btn').css('visibility', ($(this).val().length) ? "visible" : "hidden");
       });
 
       // Hide the clear button on click, and reset the input value
       $('.clear-btn').on( "click", function() {
         $textInput.val('');
         $(this).css('visibility', 'hidden');
-        $(this).parents('form').find('button.form-submit').trigger('click');
+        // $(this).parents('form').find('button.form-submit').trigger('click');
       });
     }
   };
@@ -52,7 +52,7 @@
       var $filterElm = $('.bs-region--top-left');
       $filterElm.attr('id', 'bs-region--top-left');
 
-      var sidebarClass = "hidden-xs col-sm-3 col-md-3";
+      var sidebarClass = "hidden-xs hidden-sm col-md-3";
       var popupClass = "wb-overlay modal-content overlay-def wb-popup-full";
       $('#view-filter-mobile').on( "click", function() {
         $filterElm.removeClass(sidebarClass);

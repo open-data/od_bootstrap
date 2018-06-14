@@ -2,11 +2,7 @@
   {% for key, row in rows -%}
     <div class="panel panel-default mrgn-tp-md">
       <div class="panel-body">
-        {% if row.title is not empty %}
         {{ row.content }}
-        {% else %}
-        {{ row.content }}
-        {% endif %}
       </div>
     </div>
   {%- endfor %}

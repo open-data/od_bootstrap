@@ -19,12 +19,9 @@ class FacetSummaryItemList extends PreprocessBase {
    */
   public function preprocessVariables(Variables $variables) {
     foreach ($variables['items'] as &$facet) {
-      if ($facet['value']['#title']['#theme'] == 'C') {
-        $facet['value']['#attributes']['class'] = array("btn","btn-default");
-      }
-
-      if (!empty($facet['value']['#title']['#theme']) &&
-          $facet['value']['#title']['#theme'] == 'facets_result_item__summary') {
+      if (!isset($facet['value']['#title']['#theme'])) {
+        $facet['value']['#attributes']['class'] = array("btn","btn-default", "btn-block");
+      } else if ($facet['value']['#title']['#theme'] == 'facets_result_item__summary') {
         $facet['value']['#title']['#value'] .= ' [Х]';
       }
     }

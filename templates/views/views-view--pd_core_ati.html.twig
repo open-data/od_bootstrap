@@ -49,7 +49,19 @@
   {{ title_suffix }}
   {% if header %}
     <div class="view-header">
-      {{ header }}
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 mrgn-bttm-md">
+          {{ header }}
+        </div>
+        <div class="col-xs-12 col-sm-12 hidden-md hidden-lg mrgn-bttm-md">
+          <button class="btn btn-default btn-block" id="view-filter-mobile"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+        </div>
+        {% if sortform %}
+          <div class="col-xs-12 col-sm-12 col-md-6 text-right">
+            {{ sortform }}
+          </div>
+        {% endif %}
+      </div>
     </div>
   {% endif %}
   {% if exposed %}
