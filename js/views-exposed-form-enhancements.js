@@ -14,8 +14,8 @@
   Drupal.behaviors.sort_form = {
     attach: function (context, settings) {
       if (context.constructor.name != "HTMLDocument") return;
-
-      $('#edit-sort-by').on("change", function() {
+      $('#edit-sort-by').parents('.form-item').remove();
+      $('#sort-form-edit-sort-by').on("change", function() {
         this.form.submit();
       });
     }
