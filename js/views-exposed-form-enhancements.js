@@ -50,8 +50,8 @@
   Drupal.behaviors.filter_sort_btn = {
     attach: function (context, settings) {
       $('html', context).once('sort_btn').each(function () {
-        var $filterElm = $('.bs-region--top-left');
-        $filterElm.attr('id', 'bs-region--top-left');
+        var $filterElm = $('.bs-region--left');
+        $filterElm.attr('id', 'bs-region--left');
 
         var sidebarClass = "hidden-xs hidden-sm col-md-3";
         var popupClass = "wb-overlay modal-content overlay-def wb-popup-full";
