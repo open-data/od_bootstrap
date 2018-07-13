@@ -35,11 +35,16 @@ function od_bootstrap_preprocess_views_view(&$vars) {
   }
   $form = $plugin_block->build();
   if (!isset($form['message'])) {
-    unset($form['search_api_fulltext']);
+    $form['search_api_fulltext'] = array(
+      '#name' => 'search_api_fulltext',
+      '#type' => 'hidden',
+      '#value' => $form['search_api_fulltext']['#value'],
+      '#id' => 'search_api_fulltext-sort_by'
+    );
     unset($form['sort_order']);
     unset($form['actions']);
     unset($form['submit']);
-    $form['sort_by']['#id'] = "sort-form-" . $form['sort_by']['#id']; 
+    $form['sort_by']['#id'] = "sort-form-" . $form['sort_by']['#id'];
     $vars['sortform'] = $form;
   }
 }
