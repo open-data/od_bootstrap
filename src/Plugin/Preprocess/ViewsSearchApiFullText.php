@@ -19,7 +19,7 @@ class ViewsSearchApiFullText extends PreprocessBase {
    */
   public function preprocessVariables(Variables $variables) {
     $form = &$variables['form'];
-    $form['search_api_fulltext']['#size'] = 95;
+    $form['search_api_fulltext']['#size'] = 50;
   }
 
 }
