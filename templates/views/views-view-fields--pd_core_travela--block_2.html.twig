@@ -84,8 +84,8 @@
 				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% endif %}</td>
 				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% endif %}</td>
 			{% else %}	
-				<td rowspan="6">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td rowspan="6">{{ 'N/A'|t }}</td>
+				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
 			{% endif %}
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Operational activities'|t }}</p></td>
@@ -94,8 +94,8 @@
 				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% endif %}</td>
 				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% endif %}</td>
 			{% else %}	
-				<td rowspan="6">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td rowspan="6">{{ 'N/A'|t }}</td>
+				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
 			{% endif %}
 		{% endif %}
 	</tr>
@@ -266,7 +266,7 @@
 	<p><strong>{{ 'Explication d’un écart important du total des dépenses de voyages :'|t }}</strong></p>
 	<p>{{ fields.travel_compared_fiscal_year_fr.content ?: ' N/A' }}</p>
 {% else %}
-	<p><strong>{{ 'Travel Public servants - Explanation of Significant Variance:'|t }}</strong></p>
+	<p><strong>{{ 'Total Travel - Explanation of Significant Variance:'|t }}</strong></p>
 	<p>{{ fields.travel_compared_fiscal_year_en.content ?: ' N/A'}}</p>
 {% endif %}
 
