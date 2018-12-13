@@ -2,7 +2,6 @@
 
 namespace Drupal\od_bootstrap\Plugin\Preprocess;
 
-use Drupal\Core\Render\Markup;
 use Drupal\bootstrap\Plugin\Preprocess\PreprocessBase;
 use Drupal\bootstrap\Utility\Variables;
 
@@ -21,8 +20,12 @@ class Pager extends PreprocessBase {
   public function preprocessVariables(Variables $variables) {
     global $pager_total;
 
-    if (isset($variables['items']['first'])) $variables['items']['first']['text'] = 1;
-    if (isset($variables['items']['last'])) $variables['items']['last']['text'] = $pager_total[$variables['pager']['#element']];
+    if (isset($variables['items']['first'])) {
+      $variables['items']['first']['text'] = 1;
+    }
+    if (isset($variables['items']['last'])) {
+      $variables['items']['last']['text'] = $pager_total[$variables['pager']['#element']];
+    }
   }
 
 }

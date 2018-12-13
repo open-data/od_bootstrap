@@ -31,139 +31,194 @@
 * @ingroup themeable
 */
 #}
-{% set prev_year = fields.year.content|striptags|trim - 1 %}
-<h2>{{ 'Annual Report on Travel, Hospitality and Conference Expenditures:'|t ~ ' ' ~ prev_year ~ ' - ' ~ fields.year.content|striptags|trim }}</h2>
-{% if (language == 'fr') %}
-	{% set organization_name = fields['org_name_fr'].content %}
-{% else %}
-	{% set organization_name = fields['org_name_en'].content %}
-{% endif %}
-<p>{{ 'As required by the Treasury Board Directive on Travel, Hospitality, Conference and Event Expenditures, this report provides information on the annual expenditures for each of travel, hospitality and conference fees for the @department for the fiscal year ending March 31, @date. It also provides the variance explanations from the previous fiscal year in each of these areas.'|t( { '@department': organization_name, '@date': fields.year.content }) }}</p>
-<p>{{ 'This information is updated annually and does not contain information withheld under the Access to Information Act or the Privacy Act.'|t }}</p>
-<p>{{ 'Expenditures on travel, hospitality and conference fees incurred by federal departments and agencies are related to activities that support a departmental or agency mandate and the government’s priorities.'|t }}</p>
-<h3 class="mrgn-bttm-md">
-	{{ 'Department:'|t }}
-	{% if (language == 'fr') %}
-		{{ fields['org_name_fr'].content }}
-	{% else %}
-		{{ fields['org_name_en'].content }}
-	{% endif %}
-</h3>
-<p><strong>{{ 'Departmental Mandate:'|t }}</strong></p>
-<p>
-	{% if (language == 'fr') %}
-		{{ fields['mandate_description_fr'].content }}
-	{% else %}
-		{{ fields['mandate_description_en'].content }}
-	{% endif %}
-</p>
+{% set year = fields.year.content|striptags|trim %}
+{% set prev_year = year - 1 %}
 
+{% if (language == 'fr') %}
+	<h1>{{ 'Rapport annuel sur les dépenses de voyages, d’accueil et de conférences : '|t ~ ' ' ~ prev_year ~ ' - ' ~ year }}</h1>
+	{% set organization_name = fields['org_name_fr'].content %}
+
+	<h2 class="mrgn-bttm-md">{{ organization_name }}</h2>	
+	{% if (year > '2017') %}
+		<p>{{ 'Comme l’exige la '|t }}<a href="https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=27228">{{ 'Directive sur les dépenses de voyages, d’accueil, de conférences et d’événements'|t }}</a>{{' du Conseil du Trésor, le présent rapport fournit de l’information sur les dépenses de voyages, d’accueil et de conférences de @department pour l’exercice se terminant le 31 mars @date, sauf l’information non divulguée en vertu de la '|t( { '@department': organization_name, '@date': fields.year.content })}}<a href="https://laws-lois.justice.gc.ca/fra/lois/A-1/">{{ 'la Loi sur l’accès à l’information '}}</a>{{ ' ou de la '|t}}<a href="https://laws-lois.justice.gc.ca/fra/lois/p-21/">{{ 'Loi sur la protection des renseignements personnels'|t}}</a>{{ '.'|t }}</p>
+		<p>{{ 'Les dépenses de voyages, d’accueil et de conférences engagées par un ministère ou un organisme fédéral sont liées à des activités qui appuient le mandat du ministère ou de l’organisme et les priorités du gouvernement.'|t }}</p>
+		<p>{{ 'Les dépenses de voyages, d’accueil et de conférences de @department soutiennent l’exécution des programmes et la prestation des services fondamentaux suivants pour les Canadiens.'|t ({ '@department': organization_name })}}</p>
+	{% else %}
+		<p>{{ 'Comme l’exige la Directive sur les dépenses de voyages, d’accueil, de conférences et d’événements du Conseil du Trésor, le présent rapport fournit de l’information sur les dépenses annuelles totales de voyages, d’accueil et de conférences du @department pour l’exercice se terminant le 31 mars @date'|t( { '@department': organization_name, '@date': fields.year.content }) }}</p>
+		<p>{{ 'Ces données sont mises à jour chaque année et ne comportent aucun renseignement non divulgué en vertu de la Loi sur l’accès à l’information ou de la Loi sur la protection des renseignements personnels.'|t }}</p>
+		<p>{{ 'Les dépenses de voyages, d’accueil et de conférences engagées par les ministères et les organismes fédéraux sont liées à des activités à l’appui du mandat du ministère ou de l’organisme et des priorités gouvernementales.'|t }}</p>
+	{% endif %}
+
+	<h3>{{ 'Mandat :'|t }}</h3>
+	<p>{{ fields['mandate_description_fr'].content }}</p>
+	<h3>{{ 'Dépenses de voyages, d’accueil et de conférences '|t }}</h3>
+	<h4>{{ fields['org_name_fr'].content }}</h4>
+	<p><strong>{{ 'Exercice se terminant le 31 mars '|t ~ year }}</strong></p>
+{% else %}
+	<h1>{{ 'Annual Report on Travel, Hospitality and Conference Expenditures: '|t ~ ' ' ~ prev_year ~ ' - ' ~ year }}</h1>
+	{% set organization_name = fields['org_name_en'].content %}
+
+	<h2 class="mrgn-bttm-md">{{ organization_name }}</h2>
+	{% if (year > '2017') %}
+		<p>{{ 'As required by the Treasury Board '|t }}<a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=27228">{{ 'Directive on Travel, Hospitality, Conference and Event Expenditures'|t }}</a>{{', this report provides information on travel, hospitality and conference expenditures for @department for the fiscal year ended March 31, @date, except for information withheld under the '|t ({ '@department': organization_name, '@date': fields.year.content })}}<a href="https://laws-lois.justice.gc.ca/eng/acts/a-1/">{{ 'Access to Information Act'}}</a>{{ ' or the '|t}}<a href="https://laws-lois.justice.gc.ca/eng/acts/p-21/">{{ 'Privacy Act'|t}}</a>{{ '.'|t }}</p>
+		<p>{{ 'Travel, hospitality and conference expenditures incurred by a federal department or agency relate to activities that support the department or agency’s mandate and the government’s priorities.'|t }}</p>
+		<p>{{ '@department’s travel, hospitality and conference expenditures support the delivery of the following core programs and services to Canadians.'|t ({ '@department': organization_name })}}</p>
+	{% else %}
+		<p>{{ 'As required by the Treasury Board Directive on Travel, Hospitality, Conference and Event Expenditures, this report provides information on the annual expenditures for each of travel, hospitality and conference fees for the @department for the fiscal year ending March 31, @date. It also provides the variance explanations from the previous fiscal year in each of these areas.'|t( { '@department': organization_name, '@date': fields.year.content }) }}</p>
+		<p>{{ 'This information is updated annually and does not contain information withheld under the Access to Information Act or the Privacy Act.'|t }}</p>
+		<p>{{ 'Expenditures on travel, hospitality and conference fees incurred by federal departments and agencies are related to activities that support a departmental or agency mandate and the government’s priorities.'|t }}</p>
+	{% endif %}
+
+	<h3>{{ 'Mandate:'|t }}</h3>
+	<p>{{ fields['mandate_description_en'].content }}</p>
+	<h3>{{ 'Travel, Hospitality and Conference Expenditures'|t }}</h3>
+	<h4>{{ fields['org_name_en'].content }}</h4>
+	<p><strong>{{ 'Year ended March 31, '|t ~ year }}</strong></p>
+{% endif %}
+
+<div class="table-responsive">
 <table class="table table-striped table-bordered">
 <thead>
 	<tr>
-		<th>{{ 'Expenditure Category'|t }}</th>
-		<th>{{ "Expenditures for the year ending March 31, @date ($ thousands)"|t({ '@date': fields.year.content }) }}</th>
-		<th>{{ "Expenditures for the previous year ending March 31, @date ($ thousands)"|t({ '@date': prev_year }) }}</th>
-		<th>{{ 'Change ($ thousands)'|t }}</th>
+		{% if (language == 'fr') %}
+			<th>{{ 'Catégorie de dépenses'|t }}</th>
+			<th>{{ "Dépenses pour l'exercice se terminant le 31 mars @date (en milliers de dollars)"|t({ '@date': fields.year.content }) }}</th>
+			<th>{{ "Dépenses pour l'exercice se terminant le 31 mars @date "|t({ '@date': prev_year }) }} {% if (year == '2018') %}*{% endif %} {{ "(en milliers de dollars)"|t }}</th>
+			<th>{{ 'Écart (en milliers de dollars)'|t }}</th>
+		{% else %}
+			<th>{{ 'Expenditure category'|t }}</th>
+			<th>{{ "Expenditures for year ended March 31, @date ($ thousands)"|t({ '@date': fields.year.content }) }}</th>
+			<th>{{ "Expenditures for year ended March 31, @date "|t({ '@date': prev_year }) }} {% if (year == '2018') %}*{% endif %} {{ "($ thousands)"|t }}</th>
+			<th>{{ 'Variance ($ thousands)'|t }}</th>
+		{% endif %}
 	</tr>
 </thead>
 <tbody>
 	<tr>
+		<td>
 		{% if (language == 'fr') %}
-			<td colspan="4">{{ 'Voyages'|t }}</td>
+			{{ 'Voyages'|t }}
 		{% else %}
-			<td colspan="4">{{ 'Travel'|t }}</td>
+			{{ 'Travel'|t }}
 		{% endif %}
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
-	{% if (fields.year.content|striptags|trim >= '2018') %}
+	{% if (year >= '2018') %}
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Activités opérationnelles'|t }}</p></td>
-			<td>{% if fields.operational_activities_kdollars is not empty %} {{ fields.operational_activities_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% endif %}</td>
-				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% endif %}</td>
+			<td>{% if fields.operational_activities_kdollars is not empty %} {{ fields.operational_activities_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 			{% else %}	
-				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Operational activities'|t }}</p></td>
-			<td>{% if fields.operational_activities_kdollars is not empty %} {{ fields.operational_activities_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% endif %}</td>
-				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% endif %}</td>
+			<td>{% if fields.operational_activities_kdollars is not empty %} {{ fields.operational_activities_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.operational_activities_kdollars_previous_year is not empty %} {{ fields.operational_activities_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.operational_activities_kdollars_change is not empty %} {{ fields.operational_activities_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 			{% else %}	
-				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				<td rowspan="6" style="vertical-align:bottom;">{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% endif %}
 	</tr>
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Principaux intervenants'|t }}</p></td>
-			<td>{% if fields.key_stakeholders_kdollars is not empty %} {{ fields.key_stakeholders_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.key_stakeholders_kdollars_previous_year is not empty %} {{ fields.key_stakeholders_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td>{% if fields.key_stakeholders_kdollars_change is not empty %} {{ fields.key_stakeholders_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{% if fields.key_stakeholders_kdollars is not empty %} {{ fields.key_stakeholders_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.key_stakeholders_kdollars_previous_year is not empty %} {{ fields.key_stakeholders_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.key_stakeholders_kdollars_change is not empty %} {{ fields.key_stakeholders_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Key stakeholders'|t }}</p></td>
-			<td>{% if fields.key_stakeholders_kdollars is not empty %} {{ fields.key_stakeholders_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.key_stakeholders_kdollars_previous_year is not empty %} {{ fields.key_stakeholders_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				<td>{% if fields.key_stakeholders_kdollars_change is not empty %} {{ fields.key_stakeholders_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			{% endif %}
-		{% endif %}
-	</tr>
-	<tr>
-		{% if (language == 'fr') %}
-			<td><p class="mrgn-lft-lg">{{ 'Formation'|t }}</p></td>
-			<td>{% if fields.training_kdollars is not empty %} {{ fields.training_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.training_kdollars_previous_year is not empty %} {{ fields.training_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td>{% if fields.training_kdollars_change is not empty %} {{ fields.training_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% endif %}
-			{% else %}
-				<td><p class="mrgn-lft-lg">{{ 'Training'|t }}</p></td>
-				<td>{% if fields.training_kdollars is not empty %} {{ fields.training_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				{% if (fields.year.content|striptags|trim != '2018') %}
-					<td>{% if fields.training_kdollars_previous_year is not empty %} {{ fields.training_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-					<td>{% if fields.training_kdollars_change is not empty %} {{ fields.training_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{% if fields.key_stakeholders_kdollars is not empty %} {{ fields.key_stakeholders_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.key_stakeholders_kdollars_previous_year is not empty %} {{ fields.key_stakeholders_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.key_stakeholders_kdollars_change is not empty %} {{ fields.key_stakeholders_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% endif %}
 	</tr>
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Gouvernance interne'|t }}</p></td>
-			<td>{% if fields.internal_governance_kdollars is not empty %} {{ fields.internal_governance_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.internal_governance_kdollars_previous_year is not empty %} {{ fields.internal_governance_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td>{% if fields.internal_governance_kdollars_change is not empty %} {{ fields.internal_governance_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{% if fields.internal_governance_kdollars is not empty %} {{ fields.internal_governance_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.internal_governance_kdollars_previous_year is not empty %} {{ fields.internal_governance_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.internal_governance_kdollars_change is not empty %} {{ fields.internal_governance_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Internal governance'|t }}</p></td>
-			<td>{% if fields.internal_governance_kdollars is not empty %} {{ fields.internal_governance_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.internal_governance_kdollars_previous_year is not empty %} {{ fields.internal_governance_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				<td>{% if fields.internal_governance_kdollars_change is not empty %} {{ fields.internal_governance_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{% if fields.internal_governance_kdollars is not empty %} {{ fields.internal_governance_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.internal_governance_kdollars_previous_year is not empty %} {{ fields.internal_governance_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.internal_governance_kdollars_change is not empty %} {{ fields.internal_governance_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
+			{% endif %}
+		{% endif %}
+	</tr>
+	<tr>
+		{% if (language == 'fr') %}
+			<td><p class="mrgn-lft-lg">{{ 'Formation'|t }}</p></td>
+			<td>{% if fields.training_kdollars is not empty %} {{ fields.training_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.training_kdollars_previous_year is not empty %} {{ fields.training_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.training_kdollars_change is not empty %} {{ fields.training_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
+			{% endif %}
+		{% else %}
+			<td><p class="mrgn-lft-lg">{{ 'Training'|t }}</p></td>
+			<td>{% if fields.training_kdollars is not empty %} {{ fields.training_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.training_kdollars_previous_year is not empty %} {{ fields.training_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.training_kdollars_change is not empty %} {{ fields.training_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% endif %}
 	</tr>
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Autre'|t }}</p></td>
-			<td>{% if fields.other_kdollars is not empty %} {{ fields.other_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.other_kdollars_previous_year is not empty %} {{ fields.other_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td>{% if fields.other_kdollars_change is not empty %} {{ fields.other_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				{% endif %}
-			{% else %}
-				<td><p class="mrgn-lft-lg">{{ 'Other'|t }}</p></td>
-				<td>{% if fields.other_kdollars is not empty %} {{ fields.other_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				{% if (fields.year.content|striptags|trim != '2018') %}
-					<td>{% if fields.other_kdollars_previous_year is not empty %} {{ fields.other_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-					<td>{% if fields.other_kdollars_change is not empty %} {{ fields.other_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{% if fields.other_kdollars is not empty %} {{ fields.other_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.other_kdollars_previous_year is not empty %} {{ fields.other_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.other_kdollars_change is not empty %} {{ fields.other_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
+			{% endif %}
+		{% else %}
+			<td><p class="mrgn-lft-lg">{{ 'Other'|t }}</p></td>
+			<td>{% if fields.other_kdollars is not empty %} {{ fields.other_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% if (year != '2018') %}
+				<td>{% if fields.other_kdollars_previous_year is not empty %} {{ fields.other_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+				<td>{% if fields.other_kdollars_change is not empty %} {{ fields.other_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			{% else %}	
+				<td>{{ '-'|t }}</td>
+				<td>{{ '-'|t }}</td>
 			{% endif %}
 		{% endif %}
 	</tr>
@@ -171,126 +226,124 @@
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Fonctionnaires'|t }}</p></td>
-			<td>{% if fields.public_servants_kdollars is not empty %} {{ fields.public_servants_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.public_servants_kdollars_previous_year is not empty %} {{ fields.public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.public_servants_kdollars_change is not empty %} {{ fields.public_servants_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{% if fields.public_servants_kdollars is not empty %} {{ fields.public_servants_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.public_servants_kdollars_previous_year is not empty %} {{ fields.public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.public_servants_kdollars_change is not empty %} {{ fields.public_servants_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Public servants'|t }}</p></td>
-			<td>{% if fields.public_servants_kdollars is not empty %} {{ fields.public_servants_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.public_servants_kdollars_previous_year is not empty %} {{ fields.public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.public_servants_kdollars_change is not empty %} {{ fields.public_servants_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{% if fields.public_servants_kdollars is not empty %} {{ fields.public_servants_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.public_servants_kdollars_previous_year is not empty %} {{ fields.public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.public_servants_kdollars_change is not empty %} {{ fields.public_servants_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 	<tr>
 		{% if (language == 'fr') %}
 			<td><p class="mrgn-lft-lg">{{ 'Non–fonctionnaires'|t }}</p></td>
-			<td>{% if fields.non_public_servants_kdollars is not empty %} {{ fields.non_public_servants_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.non_public_servants_kdollars_previous_year is not empty %} {{ fields.non_public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.non_public_servants_kdollars_change is not empty %} {{ fields.non_public_servants_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars is not empty %} {{ fields.non_public_servants_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars_previous_year is not empty %} {{ fields.non_public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars_change is not empty %} {{ fields.non_public_servants_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
 			<td><p class="mrgn-lft-lg">{{ 'Non-public servants'|t }}</p></td>
-			<td>{% if fields.non_public_servants_kdollars is not empty %} {{ fields.non_public_servants_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.non_public_servants_kdollars_previous_year is not empty %} {{ fields.non_public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.non_public_servants_kdollars_change is not empty %} {{ fields.non_public_servants_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars is not empty %} {{ fields.non_public_servants_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars_previous_year is not empty %} {{ fields.non_public_servants_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.non_public_servants_kdollars_change is not empty %} {{ fields.non_public_servants_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 	{% endif %}
 	<tr>
-		<td>A. {{ 'Total Travel'|t }}</td>
 		{% if (language == 'fr') %}
-			<td>{% if fields.total_travel_kdollars is not empty %} {{ fields.total_travel_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}
-				<td>{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-				<td>{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			{% endif %}
+			<td>A. {{ 'Total des dépenses de voyages'|t }}</td>
+			<td>{% if fields.total_travel_kdollars is not empty %} {{ fields.total_travel_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
-			<td>{% if fields.total_travel_kdollars is not empty %} {{ fields.total_travel_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			{% if (fields.year.content|striptags|trim != '2018') %}			
-				<td>{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-				<td>{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			{% endif %}
+			<td>A. {{ 'Total travel'|t }}</td>
+			<td>{% if fields.total_travel_kdollars is not empty %} {{ fields.total_travel_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_travel_kdollars_previous_year is not empty %} {{ fields.total_travel_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_travel_kdollars_change is not empty %} {{ fields.total_travel_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 	<tr>
-		<td>B. {{ 'Hospitality'|t }}</td>
 		{% if (language == 'fr') %}
-			<td>{% if fields.hospitality_kdollars is not empty %} {{ fields.hospitality_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.hospitality_kdollars_previous_year is not empty %} {{ fields.hospitality_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.hospitality_kdollars_change is not empty %} {{ fields.hospitality_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>B. {{ 'Accueil'|t }}</td>
+			<td>{% if fields.hospitality_kdollars is not empty %} {{ fields.hospitality_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.hospitality_kdollars_previous_year is not empty %} {{ fields.hospitality_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.hospitality_kdollars_change is not empty %} {{ fields.hospitality_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
-			<td>{% if fields.hospitality_kdollars is not empty %} {{ fields.hospitality_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.hospitality_kdollars_previous_year is not empty %} {{ fields.hospitality_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.hospitality_kdollars_change is not empty %} {{ fields.hospitality_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>B. {{ 'Hospitality'|t }}</td>
+			<td>{% if fields.hospitality_kdollars is not empty %} {{ fields.hospitality_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.hospitality_kdollars_previous_year is not empty %} {{ fields.hospitality_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.hospitality_kdollars_change is not empty %} {{ fields.hospitality_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 	{% endif %}
 	</tr>
 	<tr>
-		<td>C. {{ 'Conference Fees'|t }}</td>
 		{% if (language == 'fr') %}
-			<td>{% if fields.conference_fees_kdollars is not empty %} {{ fields.conference_fees_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.conference_fees_kdollars_previous_year is not empty %} {{ fields.conference_fees_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.conference_fees_kdollars_change is not empty %} {{ fields.conference_fees_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>C. {{ 'Frais de conférences'|t }}</td>
+			<td>{% if fields.conference_fees_kdollars is not empty %} {{ fields.conference_fees_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.conference_fees_kdollars_previous_year is not empty %} {{ fields.conference_fees_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.conference_fees_kdollars_change is not empty %} {{ fields.conference_fees_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
-			<td>{% if fields.conference_fees_kdollars is not empty %} {{ fields.conference_fees_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.conference_fees_kdollars_previous_year is not empty %} {{ fields.conference_fees_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.conference_fees_kdollars_change is not empty %} {{ fields.conference_fees_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>C. {{ 'Conference fees'|t }}</td>
+			<td>{% if fields.conference_fees_kdollars is not empty %} {{ fields.conference_fees_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.conference_fees_kdollars_previous_year is not empty %} {{ fields.conference_fees_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.conference_fees_kdollars_change is not empty %} {{ fields.conference_fees_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 	<tr>
-		<td>{{ 'Total'|t }}  [A+B+C]</td>
 		{% if (language == 'fr') %}
-			<td>{% if fields.total_kdollars is not empty %} {{ fields.total_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.total_kdollars_previous_year is not empty %} {{ fields.total_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.total_kdollars_change is not empty %} {{ fields.total_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{{ 'Total'|t }}  [A+B+C]</td>
+			<td>{% if fields.total_kdollars is not empty %} {{ fields.total_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_kdollars_previous_year is not empty %} {{ fields.total_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_kdollars_change is not empty %} {{ fields.total_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
-			<td>{% if fields.total_kdollars is not empty %} {{ fields.total_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.total_kdollars_previous_year is not empty %} {{ fields.total_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.total_kdollars_change is not empty %} {{ fields.total_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{{ 'Total'|t }}  [A+B+C]</td>
+			<td>{% if fields.total_kdollars is not empty %} {{ fields.total_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_kdollars_previous_year is not empty %} {{ fields.total_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.total_kdollars_change is not empty %} {{ fields.total_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 	<tr>
-		<td>{{ 'International Travel by Minister and Minister\'s Staff'|t }}</td>
 		{% if (language == 'fr') %}
-			<td>{% if fields.minister_kdollars is not empty %} {{ fields.minister_kdollars.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.minister_kdollars_previous_year is not empty %} {{ fields.minister_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
-			<td>{% if fields.minister_kdollars_change is not empty %} {{ fields.minister_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }}{% endif %}</td>
+			<td>{{ 'Voyages internationaux du ministre et du personnel du ministre'|t }}</td>
+			<td>{% if fields.minister_kdollars is not empty %} {{ fields.minister_kdollars.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.minister_kdollars_previous_year is not empty %} {{ fields.minister_kdollars_previous_year.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.minister_kdollars_change is not empty %} {{ fields.minister_kdollars_change.content|striptags|trim|number_format('0', ',', ' ') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% else %}
-			<td>{% if fields.minister_kdollars is not empty %} {{ fields.minister_kdollars.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.minister_kdollars_previous_year is not empty %} {{ fields.minister_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
-			<td>{% if fields.minister_kdollars_change is not empty %} {{ fields.minister_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }}{% endif %}</td>
+			<td>{{ 'International travel by minister and minister\'s staff (included in travel)'|t }}</td>
+			<td>{% if fields.minister_kdollars is not empty %} {{ fields.minister_kdollars.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.minister_kdollars_previous_year is not empty %} {{ fields.minister_kdollars_previous_year.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
+			<td>{% if fields.minister_kdollars_change is not empty %} {{ fields.minister_kdollars_change.content|striptags|trim|number_format('0', '.', ',') }} {% else %} {{ '-'|t }} {% endif %}</td>
 		{% endif %}
 	</tr>
 </tbody>
 </table>
+</div>
 
 {% if (language == 'fr') %}
-	<p><strong>{{ 'Explication d’un écart important du total des dépenses de voyages :'|t }}</strong></p>
+	{% if (year == '2018') %}
+		<p>{{ '* À compter du 1er avril 2017, le total des dépenses annuelles de voyage doit être divulgué par catégorie de voyage (ci-dessus) et une explication des écarts importants doit être fournie sur le total des dépenses de voyage.  Auparavant, le total des dépenses de voyage était divulgué entre les catégories de voyage des fonctionnaires et des non-fonctionnaires.'|t }}</p>
+	{% endif %}
+	<h3>{{ 'Écarts importants par rapport à l’exercice précédent'|t }}</h3>
+	<p><strong>{{ 'Total des dépenses de voyages :'|t }}</strong></p>
 	<p>{{ fields.travel_compared_fiscal_year_fr.content ?: ' N/A' }}</p>
-{% else %}
-	<p><strong>{{ 'Total Travel - Explanation of Significant Variance:'|t }}</strong></p>
-	<p>{{ fields.travel_compared_fiscal_year_en.content ?: ' N/A'}}</p>
-{% endif %}
-
-{% if (language == 'fr') %}
-	<p><strong>{{ 'Accueil - Explication d’un écart important :'|t }}</strong></p>
+	<p><strong>{{ 'Accueil :'|t }}</strong></p>
 	<p>{{ fields.hospitality_compared_fiscal_year_fr.content ?:  ' N/A' }}</p>
-{% else %}
-	<p><strong>{{ 'Hospitality - Explanation of Significant Variance:'|t }}</strong></p>
-	<p>{{ fields.hospitality_compared_fiscal_year_en.content ?:  ' N/A' }}</p>
-{% endif %}
-
-{% if (language == 'fr') %}
-	<p><strong>{{ 'Frais de participation aux conférence - Explication d’un écart important :'|t }}</strong></p>
+	<p><strong>{{ 'Frais de conférences :'|t }}</strong></p>
 	<p>{{ fields.conference_fees_compared_fiscal_year_fr.content ?:  ' N/A' }}</p>
-{% else %}
-	<p><strong>{{ 'Conference Fees - Explanation of Significant Variance:'|t }}</strong></p>
-	<p>{{ fields.conference_fees_compared_fiscal_year_en.content ?:  ' N/A' }}</p>
-{% endif %}
-
-{% if (language == 'fr') %}
-	<p><strong>{{ 'Voyages internationaux du ministre et du personnel du ministre - Explication d’un écart important :'|t }}</strong></p>
+	<p><strong>{{ 'Le ministre et le personnel exempté du ministre – voyages internationaux :'|t }}</strong></p>
 	<p>{{ fields.minister_compared_fiscal_year_fr.content ?: ' N/A' }}</p>
 {% else %}
-	<p><strong>{{ 'International Travel by Minister and Minister’s Staff - Explanation of Significant Variance:'|t }}</strong></p>
+	{% if (year > '2017') %}
+		<p>{{ '* Effective April 1st, 2017, total annual travel expenditures must be disclosed per travel category (above) and an explanation of significant variance be provided on total travel expenditures.  Previously, total travel expenditures were disclosed between the travel categories of public and non-public servants.'|t }}</p>
+	{% endif %}
+	<h3>{{ 'Explanation of significant variances compared with previous fiscal year'|t }}</h3>
+	<p><strong>{{ 'Total travel:'|t }}</strong></p>
+	<p>{{ fields.travel_compared_fiscal_year_en.content ?: ' N/A'}}</p>
+	<p><strong>{{ 'Hospitality:'|t }}</strong></p>
+	<p>{{ fields.hospitality_compared_fiscal_year_en.content ?:  ' N/A' }}</p>
+	<p><strong>{{ 'Conference fees:'|t }}</strong></p>
+	<p>{{ fields.conference_fees_compared_fiscal_year_en.content ?:  ' N/A' }}</p>
+	<p><strong>{{ 'Minister and minister’s exempt staff - International travel:'|t }}</strong></p>
 	<p>{{ fields.minister_compared_fiscal_year_en.content ?: ' N/A' }}</p>
 {% endif %}
 

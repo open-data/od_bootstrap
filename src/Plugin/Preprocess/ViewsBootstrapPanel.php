@@ -41,7 +41,8 @@ class ViewsBootstrapPanel extends PreprocessBase {
           $label = $view->field[$panel_title_field]->label();
           if ($label != "") {
             $variables['rows'][$id]['title'] = Markup::Create($label . $this->t(': ') . $title);
-          } else {
+          }
+          else {
             $variables['rows'][$id]['title'] = Markup::Create($title);
           }
         }
