@@ -333,7 +333,7 @@
 	<p><strong>{{ 'Le ministre et le personnel exempté du ministre – voyages internationaux :'|t }}</strong></p>
 	<p>{{ fields.minister_compared_fiscal_year_fr.content ?: ' N/A' }}</p>
 {% else %}
-	{% if (year > '2017') %}
+	{% if (year == '2018') %}
 		<p>{{ '* Effective April 1st, 2017, total annual travel expenditures must be disclosed per travel category (above) and an explanation of significant variance be provided on total travel expenditures.  Previously, total travel expenditures were disclosed between the travel categories of public and non-public servants.'|t }}</p>
 	{% endif %}
 	<h3>{{ 'Explanation of significant variances compared with previous fiscal year'|t }}</h3>
