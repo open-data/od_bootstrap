@@ -12,6 +12,6 @@
  * @ingroup themeable
  */
 #}
-<a href="{{ url }}"{{ attributes.addClass('btn', 'btn-default', 'fa', 'fa-rss', 'feed-icon') }}>
-  <span class="wb-inv">{{ 'Subscribe to @title'|t({'@title': title}) }}</span>
+<a href="{{ url }}"{{ attributes.addClass('btn', 'btn-default', 'feed-icon') }}>
+  <i class="fas fa-rss"></i><span class="wb-inv">{{ 'Subscribe to @title'|t({'@title': title}) }}</span>
 </a>

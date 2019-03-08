@@ -1,7 +1,7 @@
 .pillars {
   background-color: #eaebed;
   display: inline-block;
-  padding: 10px 5px; }
+  padding: 5px 5px; }
   .pillars h2 {
     display: inline;
     font-size: 16px;
@@ -109,6 +109,9 @@
 .block-region-top .pillars {
   float: right; }
 
+.block-region-top-right .pillars {
+  float: right; }
+
 .user-register-form,
 .webform-submission-form {
   margin-top: 10px;
@@ -196,3 +199,65 @@ span.clear-btn {
   font-weight: bold;
   left: -15px;
   visibility: hidden; }
+
+.noPadding-left {
+  padding-top:5px;
+  padding-left:0px;
+}
+
+.noPadding-right {
+  padding-top:5px;
+  padding-right:0px;
+}
+
+.btnPadding {
+  padding: 12px 16px;
+}
+
+ul.subjects {
+  margin:0 0 50px 0;
+  padding: 0;
+  text-align: center;
+  list-style: none;
+}
+ul.subjects li {
+  margin:0;
+  padding: 0;
+  list-style: none;
+  vertical-align: top;
+  display: inline-block;
+}
+ul.subjects li a:hover, ul.subjects li a:hover span {
+  text-decoration: none!important;
+}
+ul.subjects li a {
+  display: inline-block;
+  margin: 0 16px 20px 16px;
+  outline: 0;
+}
+ul.subjects li a i:hover {
+  color: #8792A4;
+}
+ul.subjects li a i {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  clear: both;
+  padding-top: 16px;
+  font-size: 40px;
+  color: #284162;
+}
+ul.subjects li a:hover, ul.subjects li a:hover span {
+  text-decoration: none!important;
+}
+ul.subjects li a span {
+  display: block;
+  width: 80px;
+}
+  
+@media (min-width: 1200px) {
+    .visible-lg-inline {
+        display: inline-block!important;
+  }
+}

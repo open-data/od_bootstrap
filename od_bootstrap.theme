@@ -25,8 +25,7 @@ function od_bootstrap_theme_suggestions_html_alter(array &$suggestions, array $v
  * Implements hook_preprocess_HOOK() for views-view.html.twig.
  */
 function od_bootstrap_preprocess_views_view(&$vars) {
-
-  if ($vars['view']->storage->get('base_field') == 'search_api_id') {
+  if ($vars['view']->storage->get('base_field') == 'search_api_id' && $vars['view']->current_display == 'block_1') {
     $block_manager = \Drupal::service('plugin.manager.block');
     $config = [];
 
@@ -51,6 +50,7 @@ function od_bootstrap_preprocess_views_view(&$vars) {
         unset($form['sort_order']);
         unset($form['actions']);
         unset($form['submit']);
+
         $form['sort_by']['#id'] = "sort-form-" . $form['sort_by']['#id'];
         $vars['sortform'] = $form;
       }
